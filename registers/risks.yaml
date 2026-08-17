@@ -1,0 +1,14 @@
+risks: []
+
+# Example:
+# - id: RISK-001
+#   title: "..."
+#   business_service: "..."
+#   crown_jewel: "..."
+#   threat: "..."
+#   attack_paths: []
+#   inherent_risk: high
+#   residual_risk: medium
+#   owner: "..."
+#   treatment: mitigate
+#   evidence: []

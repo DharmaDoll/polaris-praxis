@@ -1,0 +1,10 @@
+assumptions: []
+
+# Example:
+# - id: ASM-001
+#   statement: "Identity compromise is the dominant path to Tier-0 assets."
+#   confidence: medium
+#   evidence:
+#     - "..."
+#   validation_method: "Attack path analysis"
+#   status: active

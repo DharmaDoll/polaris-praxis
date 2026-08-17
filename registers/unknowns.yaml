@@ -1,0 +1,12 @@
+unknowns: []
+
+# Example:
+# - id: UNKNOWN-001
+#   topic: crown-jewel
+#   question: "主要サービス停止時のBusiness Impactは？"
+#   status: open
+#   priority: critical
+#   owner: business-owner
+#   needed_for:
+#     - strategy-fy2027
+#   created_at: YYYY-MM-DD
