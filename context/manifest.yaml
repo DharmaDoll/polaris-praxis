@@ -1,0 +1,18 @@
+# Workspace manifest. Replace Unknown values only with reviewed organizational facts.
+workspace_id: UNKNOWN
+organization: Unknown
+business_service: Unknown
+period: Unknown
+status: draft
+data_classification: Unknown
+input_owner: Unknown
+repository_maintainer: Unknown
+decision_authority: Unknown
+review_date: Unknown
+source_of_truth: context/
+draft_output: drafts/
+authoritative_outputs:
+  - registers/
+  - strategy/
+  - roadmap/
+  - initiatives/

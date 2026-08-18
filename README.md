@@ -99,6 +99,47 @@ ruby scripts/validate_repository.rb
 
 詳細な入力項目、レビューゲート、出力スキーマは [`docs/USER_GUIDE_AND_SPECIFICATION.md`](docs/USER_GUIDE_AND_SPECIFICATION.md)、最初の試行計画は [`docs/PILOT_GUIDE.md`](docs/PILOT_GUIDE.md)、実装チェックリストは [`plan.md`](plan.md) を参照してください。
 
+## エージェントを使った運用
+
+このリポジトリは単体アプリケーションではなく、Codexなどのエージェントに読み込ませて、利用者の組織データを継続的に更新するための作業基盤です。エージェントは「正解を決める自動化」ではなく、入力の整理、追跡可能なドラフト作成、質問の抽出、検証を担当します。承認とRisk Acceptanceは人が行います。
+
+### エージェントに渡すもの
+
+エージェントを起動する前に、[`context/README.md`](context/README.md) の入力契約を確認し、次の順でコンテキストを指定します。
+
+1. このリポジトリの`AGENTS.md`
+2. `vision/`と対象業務に関係する`context/`
+3. 対象の入力ファイル（通常は`context/business/`のPlanning Input）
+4. 実行するPrompt（`prompts/11-goal-to-kpi.md`または`prompts/12-results-to-next-year.md`）
+5. [`templates/agent-request.md`](templates/agent-request.md) で出力先、対象ブランチ、今回のレビュー範囲を指定する
+
+依頼文には、対象組織・対象サービス・期間・既知のEvidence・不明点を明記してください。未提供の組織情報をエージェントに推測させてはいけません。
+
+### エージェントの安全な作業単位
+
+```text
+Read → Classify (Fact / Unknown / Assumption / Decision / Evidence)
+     → Ask minimum questions
+     → Draft Objective / KPI / Risk traceability
+     → Run validator
+     → Human review gate
+     → Approved files only merge to main
+```
+
+エージェントの出力は、承認前は [`drafts/`](drafts/) に保存するドラフトです。特に`registers/`、`strategy/`、`roadmap/`、`initiatives/`の正本更新、Residual Riskの受入れ、Decision Recordの確定は、レビュー完了後に行います。Promptごとの入力・出力・Gateは [`prompts/README.md`](prompts/README.md) に記載しています。実データを扱う場合は、必ず対象組織の非公開リポジトリまたは承認済みの作業ブランチを使用してください。
+
+### Skillの段階的な導入案
+
+最初は一つの複合Skillにまとめ、同じ作業が繰り返されてから分割します。Skillは判断を自動承認するものではなく、`AGENTS.md`、テンプレート、Prompt、検証スクリプトを正しい順序で使わせる手順書です。
+
+- `security-strategy-operator`（初期候補）: Intake、Objective/KPI設計、Evidenceレビュー、次期提言、検証をモードとして提供
+- `security-strategy-intake`（分割候補）: Planning Inputの不足項目、Fact/Unknown分類、入力受入れGate
+- `security-strategy-objective`（分割候補）: Goal → Risk → Objective → KPI → Initiativeの追跡性と割合表現禁止の検査
+- `security-strategy-review`（分割候補）: Actual / Evidence、Residual Risk、Continue/Change/Stop等の判断材料整理
+- `security-strategy-quality-gate`（分割候補）: YAML・ID・参照・Markdownリンク・不確実性の検証
+
+Skill導入の判断条件は、同じ手作業が複数のPilotで繰り返され、入力漏れやレビュー漏れがEvidenceとして確認されたことです。最初からUIや多数のSkillを作らず、既存Promptと`ruby scripts/validate_repository.rb`を呼び出す薄いSkillから始めます。
+
 ## Start Here（設計・運用者向け）
 
 1. `AGENTS.md`、[`vision/VISION.md`](vision/VISION.md)、[`vision/PRINCIPLES.md`](vision/PRINCIPLES.md) を確認する

@@ -46,9 +46,48 @@ REGISTER_RULES = {
   }
 }.freeze
 
+MANIFEST_REQUIRED_FIELDS = %w[
+  workspace_id organization business_service period status data_classification
+  input_owner repository_maintainer decision_authority review_date
+  source_of_truth draft_output authoritative_outputs
+].freeze
+
 errors = []
 seen_ids = Set.new
 records_by_register = {}
+
+manifest_path = ROOT.join("context", "manifest.yaml")
+if manifest_path.file?
+  begin
+    manifest = YAML.safe_load_file(manifest_path, aliases: false)
+    unless manifest.is_a?(Hash)
+      errors << "context/manifest.yaml must contain a mapping"
+    else
+      missing = MANIFEST_REQUIRED_FIELDS.reject { |field| manifest.key?(field) }
+      errors << "context/manifest.yaml missing fields: #{missing.join(', ')}" unless missing.empty?
+
+      allowed_statuses = %w[draft active review archived]
+      status = manifest["status"]
+      errors << "context/manifest.yaml has invalid status: #{status}" if status && !allowed_statuses.include?(status)
+
+      %w[source_of_truth draft_output].each do |field|
+        value = manifest[field]
+        next unless value.is_a?(String)
+
+        errors << "context/manifest.yaml references missing directory: #{value}" unless ROOT.join(value).directory?
+      end
+
+      outputs = manifest["authoritative_outputs"]
+      unless outputs.is_a?(Array) && outputs.all? { |value| value.is_a?(String) && ROOT.join(value).directory? }
+        errors << "context/manifest.yaml authoritative_outputs must list existing directories"
+      end
+    end
+  rescue Psych::Exception => e
+    errors << "Invalid YAML in context/manifest.yaml: #{e.message.lines.first.strip}"
+  end
+else
+  errors << "Missing context/manifest.yaml"
+end
 
 REGISTER_RULES.each do |filename, rule|
   path = ROOT.join("registers", filename)

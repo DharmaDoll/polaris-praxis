@@ -1,8 +1,8 @@
-# Security Strategy OS Implementation Plan
+# Security Strategy OS Agent-first Implementation Plan
 
 ## Purpose
 
-現行MVPから、1つの重要事業サービスで「企業・組織目標の入力 → Security Objective / KPI → 実績 → 次年度提言」を実証するまでのチェックリスト。
+現行MVPから、利用者が自分の組織データをエージェントに読み込ませ、「企業・組織目標の入力 → Security Objective / KPI → 実績 → 次年度提言」を安全に完了するまでのチェックリスト。
 
 ```text
 Evidence Status: 実運用Evidenceは未取得
@@ -18,6 +18,8 @@ Primary Goal: 機能追加ではなく、意思決定に利用できることの
 - 全ObjectiveとInitiativeにKPIを設定する
 - KPIに割合、パーセント、率、比率、分数表現を使わない
 - UI、API、大規模自動化はPilot Evidenceが得られるまで着手しない
+- エージェントの未承認出力は`drafts/`に限定し、正本は人のレビュー後に更新する
+- 1つのリポジトリを1つの承認済み組織ワークスペースとして扱う。別方式はData IsolationのDecision後に採用する
 
 ## Phase 0 — MVP Foundation
 
@@ -47,6 +49,9 @@ Exit: 企業・組織目標と実績を入力するためのMVP部品が利用�
 - [ ] Decision Authorityを決定し、`UNKNOWN-001`を更新する
 - [ ] 継続更新のOwnerを決定し、`UNKNOWN-004`を更新する
 - [ ] 実組織データ投入前に情報分類・アクセス条件を決定し、`UNKNOWN-002`を更新する
+- [ ] `context/manifest.yaml`にWorkspace、Organization、Business Service、Period、Owner、Data Classificationを記載する
+- [ ] `context/README.md`の入力契約を確認する
+- [ ] `drafts/<WORKSPACE>/`を作成し、エージェント出力先を正本と分離する
 - [ ] Pilot用の`planning/*`ブランチを作成する
 
 Gate: 対象、Owner、Decision Authority、情報取扱い条件が明示されている。
@@ -54,6 +59,7 @@ Gate: 対象、Owner、Decision Authority、情報取扱い条件が明示され
 ## Phase 2 — Planning Input
 
 - [ ] `templates/planning-input.md`を対象年度・期間向けに複製する
+- [ ] ファイル名を`context/business/planning-input-<YEAR>-<ORG>.md`とする
 - [ ] Company Vision / Values / Annual Goalsを入力する
 - [ ] Organization Mission / Annual Goals / Period Goalsを入力する
 - [ ] Priority InitiativesとConstraintsを入力する
@@ -63,12 +69,14 @@ Gate: 対象、Owner、Decision Authority、情報取扱い条件が明示され
 - [ ] 重大な不足情報を`registers/unknowns.yaml`へ登録する
 - [ ] Information Handling Guidelineに反する原本がないことを確認する
 - [ ] Gate 1: Input Acceptedを実施する
+- [ ] Agent Requestに入力ファイル、Prompt、Template、Draft出力先、禁止ファイルを明記する
 
 Exit: Objectiveを検討できる最小限のBusiness / Organization Contextが承認されている。
 
 ## Phase 3 — Objective / KPI Design
 
 - [ ] `prompts/11-goal-to-kpi.md`を実行する
+- [ ] エージェントが`AGENTS.md`、`vision/`、`context/manifest.yaml`、対象`context/`を先に読んだことを確認する
 - [ ] 結論を左右する質問を3〜5件以内に絞る
 - [ ] 関連するAssetをIntrinsic / Positional / Operational Valueで確認する
 - [ ] 関連するThreatとAttack Pathを確認する
@@ -81,6 +89,7 @@ Exit: Objectiveを検討できる最小限のBusiness / Organization Contextが�
 - [ ] 定性的なKPIには観測可能な状態、判定条件、期限、Evidenceを定義する
 - [ ] KPIのBaselineが不明な場合は確認方法と期限を定義する
 - [ ] `registers/objectives.yaml`と`registers/kpis.yaml`を更新する
+- [ ] 承認前の出力を`drafts/<WORKSPACE>/`に保存し、正本更新はレビュー後に行う
 - [ ] `ruby scripts/validate_repository.rb`を実行する
 - [ ] Gate 2: Objective Approvedを実施する
 
@@ -162,4 +171,5 @@ Exit: 実証された問題に対する最小限のHardeningだけが次期計�
 - [ ] KPIに禁止された割合表現がない
 - [ ] Evidence不足を達成扱いしていない
 - [ ] 別のReviewerが判断理由を再現できる
-
+- [ ] エージェントがどの入力を読み、どのPromptを使い、どのDraftから正本へ反映したか追跡できる
+- [ ] `context/manifest.yaml`、`context/README.md`、`drafts/README.md`の境界が守られている
