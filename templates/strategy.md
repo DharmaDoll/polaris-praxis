@@ -19,7 +19,8 @@
 - Target state:
 - Strategic objective:
 - Initiatives:
-- Metrics:
+- KPI（1件以上。割合・率・比率は禁止）:
+- Supporting metrics:
 - Residual risk:
 
 ## H1 Priorities
@@ -33,6 +34,8 @@
 ## Unknowns
 
 ## KPI / KRI
+
+各Objectiveについて、`templates/kpi.md` を使って少なくとも1つのKPIを定義する。
 
 ## Governance
 

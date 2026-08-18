@@ -25,7 +25,9 @@ Asset Value
 ## Strategy Extension
 
 ```text
-Asset
+Company Vision / Values / Annual Goals
+→ Organization Mission / Annual / Period Goals / Priority Initiatives
+→ Asset
 → Business
 → Threat
 → Attack Path
@@ -37,8 +39,24 @@ Asset
 → Roadmap
 → Initiative
 → Execution
-→ Metric
+→ KPI / Supporting Metric
 → Evidence
+→ Actual
 → Review
+→ Next-period Recommendation
 → Adapt
 ```
+
+## Primary Planning UX
+
+```text
+Company / Organization Goals
+→ Security Objective
+→ KPI
+→ Initiative / Execution
+→ Actual / Evidence
+→ Continue / Change / Stop / Complete / Hold
+→ Next-period Recommendation
+```
+
+Threat、Attack Path、Risk、Control、Residual Risk、Resilienceは、利用者へ最初から網羅入力を求める項目ではなく、ObjectiveとKPIの妥当性を裏側で検証するために使用する。

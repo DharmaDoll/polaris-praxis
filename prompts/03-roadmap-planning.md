@@ -24,6 +24,8 @@ Vision
 - Foundation workとOutcome workを区別する。
 - 「導入」「展開」「作成」だけで成功を定義しない。
 - Doneの定義をEvidenceで書く。
+- 各ObjectiveとInitiativeに、少なくとも1つのKPIを設定する。
+- KPIには割合、パーセント、率、比率を使用しない。
 
 ## Output
 

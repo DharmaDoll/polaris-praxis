@@ -1,0 +1,19 @@
+objectives: []
+
+# Example:
+# - id: OBJ-001
+#   title: "..."
+#   period:
+#     fiscal_year: 2027
+#     half: H1
+#   company_goals: []
+#   organization_goals: []
+#   outcome: "..."
+#   risks: []
+#   attack_paths: []
+#   initiatives: []
+#   kpis: []
+#   owner: unknown
+#   decision_authority: unknown
+#   status: draft
+#   evidence: []

@@ -6,7 +6,7 @@
 
 - Objectives
 - Initiatives
-- Metrics
+- KPI / Metrics
 - Risks
 - Attack Paths
 - Controls
@@ -41,6 +41,8 @@ Variance causeは以下で分類する。
 - Threat change
 - Invalid assumption
 - Measurement issue
+
+各ObjectiveとInitiativeについて、KPIのBaseline、Target、Actual、Evidence、差異、差異原因を確認する。定性的なKPIは、定義済みの状態判定条件により評価する。実績レビューでも割合、パーセント、率、比率を新たに生成しない。
 
 ## Output
 

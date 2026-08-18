@@ -27,6 +27,9 @@ Business Objective
 - 優先順位とその理由を明示する。
 - やらないこと / 後回しにすることも明示する。
 - Budget / Headcount / Engineering Capacity等の制約が不明ならUnknownとして扱う。
+- 各Annual ObjectiveとStrategic Themeに、少なくとも1つのKPIを定義する。
+- 定性的な目標も、観測可能な状態と判定条件を持つKPIとして表現する。
+- KPIには割合、パーセント、率、比率を使用しない。絶対件数、所要時間、期限、金額、絶対量、または明示的な状態を使用する。
 - Framework mappingは最後に行う。
 
 ## Deliverables

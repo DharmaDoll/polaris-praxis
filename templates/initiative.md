@@ -26,7 +26,11 @@
 
 ## Controls
 
-## Metrics
+## KPI
+
+少なくとも1つ定義する。割合・パーセント・率・比率は使用しない。
+
+## Supporting Metrics
 
 ## Evidence
 

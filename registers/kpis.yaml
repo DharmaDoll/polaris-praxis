@@ -1,0 +1,18 @@
+kpis: []
+
+# Example:
+# - id: KPI-001
+#   title: "..."
+#   objectives: []
+#   initiatives: []
+#   outcome_type: risk-outcome
+#   measurement_mode: count
+#   unit: cases
+#   baseline: unknown
+#   target: unknown
+#   period:
+#     fiscal_year: 2027
+#     half: H1
+#   owner: unknown
+#   evidence: []
+#   status: draft

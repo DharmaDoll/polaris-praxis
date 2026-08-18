@@ -8,7 +8,9 @@ The goal is not to generate documents.
 The goal is to continuously connect:
 
 ```text
-Business
+Company Vision / Values / Annual Goals
+→ Organization Mission / Annual / Period Goals / Priority Initiatives
+→ Business
 → Assets
 → Threats
 → Attack Paths
@@ -18,7 +20,7 @@ Business
 → Resilience
 → Strategy
 → Execution
-→ Evidence
+→ KPI / Evidence
 → Learning
 ```
 
@@ -44,13 +46,17 @@ Business
 18. Use external frameworks as objective reference points, not as substitutes for risk reasoning.
 19. When creating executive material, preserve the underlying evidence and uncertainty.
 20. Every major recommendation should be falsifiable or measurable where practical.
+21. Every Objective and Initiative must have at least one KPI. Express qualitative outcomes as observable state-based KPIs when appropriate. Never express a KPI as a percentage, rate, ratio, or proportion.
+22. For annual or period planning, begin with Company and Organization Vision, Values, Goals, Priority Initiatives, and Constraints; produce Security Objectives and KPI; later compare Actuals and Evidence to produce next-period recommendations.
+23. Treat every file under `examples/` as Synthetic and non-authoritative. Never copy sample IDs, values, Evidence, or Decisions into root registers or approved artifacts without replacing them with reviewed organizational facts and passing the normal Decision Gates.
 
 ## Default Reasoning Model
 
 For strategic security analysis, use:
 
 ```text
-Business / Mission
+Company / Organization Goals
+→ Business / Mission
 → Asset
 → Threat
 → Attack Path
@@ -62,7 +68,7 @@ Business / Mission
 → Resilience
 → Objective
 → Initiative
-→ Metric
+→ KPI / Supporting Metric
 → Evidence
 ```
 
@@ -141,6 +147,8 @@ Prefer metrics in this order:
 4. Activity
 
 Avoid using activity metrics as proof of risk reduction.
+
+Every Objective and Initiative must have at least one KPI. KPI values must use absolute counts, elapsed time, dates, monetary amounts, absolute quantities, or explicitly defined observable states. Do not use percentages, rates, ratios, proportions, coverage rates, achievement rates, or compliance rates. When the size of a population matters, record the total population and the qualifying count as separate absolute values without dividing them.
 
 ## Git / Branch Policy
 

@@ -8,7 +8,9 @@
 
 ## Initiative Review
 
-## Metric Review
+## KPI / Metric Review
+
+各ObjectiveとInitiativeについて、Baseline / Target / Actual / Evidence / Variance / Causeを確認する。割合・率・比率は使用しない。
 
 ## Material Risk Changes
 
