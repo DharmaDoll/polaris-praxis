@@ -5,6 +5,10 @@
 ## Core Model
 
 ```text
+Company Vision / Values / Annual Goals
+        ↓
+Organization Mission / Annual / Period Goals / Priority Initiatives
+        ↓
 Business / Mission
         ↓
 Asset / Crown Jewel
@@ -25,9 +29,9 @@ Strategy / Roadmap / Initiative
         ↓
 Execution
         ↓
-Metrics / Evidence
+KPI / Evidence
         ↓
-Review / Adapt
+Actuals / Review / Next-period Recommendations
         └──────────────────→ Strategy
 ```
 
@@ -43,11 +47,27 @@ Review / Adapt
 1. `AGENTS.md` を読む
 2. `vision/VISION.md` を確認する
 3. `vision/PRINCIPLES.md` を確認する
-4. `context/` に現状情報を投入する
-5. `registers/unknowns.yaml` に不足情報を記録する
-6. Codexに `prompts/00-bootstrap-interview.md` を与える
-7. 対話でCurrent Stateを形成する
-8. `strategy/`, `roadmap/`, `initiatives/` に成果物を作る
+4. `docs/USER_GUIDE_AND_SPECIFICATION.md` で利用手順と現行仕様を確認する
+5. `templates/planning-input.md` に企業・組織のVision、Value、年間／期目標、重点施策を入力する
+6. Codexに `prompts/11-goal-to-kpi.md` を与え、Security ObjectiveとKPI案を作る
+7. `registers/unknowns.yaml` に不足情報を記録する
+8. 必要に応じて `prompts/00-bootstrap-interview.md` で詳細なCurrent Stateを形成する
+9. `strategy/`, `roadmap/`, `initiatives/`, `metrics/` に承認済み成果物を作る
+10. 後日 `templates/period-results.md` に実績を入力し、`prompts/12-results-to-next-year.md` で次期提言を作る
+
+最初は `docs/PILOT_GUIDE.md` に従い、1つの重要事業サービスで一連の流れを検証する。
+
+変更前のローカル検証:
+
+```bash
+ruby scripts/validate_repository.rb
+```
+
+MVP後の重要な拡張候補は `docs/DEFERRED_REQUIREMENTS.md` で管理する。
+
+## Sample Data
+
+`examples/product-security-controls/`に、架空企業の企業・組織目標、Product Security Current State、承認済みPlan、後日実績のサンプルがある。`examples/`配下はすべてSyntheticかつ非正本であり、rootの台帳・戦略・Evidenceへ自動反映しない。
 
 ## Branch Model
 

@@ -1,4 +1,46 @@
-unknowns: []
+unknowns:
+  - id: UNKNOWN-001
+    topic: governance
+    question: "mainへのマージ、戦略承認、残余リスク受容について、誰がDecision Authorityを持つか？"
+    status: open
+    priority: critical
+    owner: unknown
+    needed_for:
+      - initial-strategy-approval
+      - risk-acceptance
+    created_at: 2026-08-18
+
+  - id: UNKNOWN-002
+    topic: information-governance
+    question: "このリポジトリに格納可能な情報分類、アクセス範囲、保持期間、削除手順は何か？"
+    status: open
+    priority: critical
+    owner: unknown
+    needed_for:
+      - organizational-evidence-ingestion
+    created_at: 2026-08-18
+
+  - id: UNKNOWN-003
+    topic: operations
+    question: "Gitホスティング、バックアップ、RTO/RPO、ブランチ保護の要件は何か？"
+    status: open
+    priority: high
+    owner: unknown
+    needed_for:
+      - production-operation
+      - resilience-design
+    created_at: 2026-08-18
+
+  - id: UNKNOWN-004
+    topic: operating-model
+    question: "Planning Input、Objective、KPI、Evidence、Repositoryの継続更新について、各Ownerを誰に割り当てるか？"
+    status: open
+    priority: high
+    owner: unknown
+    needed_for:
+      - mvp-pilot
+      - ongoing-review-cycle
+    created_at: 2026-08-18
 
 # Example:
 # - id: UNKNOWN-001

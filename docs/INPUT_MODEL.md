@@ -1,5 +1,18 @@
 # Input Model
 
+## Minimum Planning Input
+
+通常利用では、最初に次だけを`templates/planning-input.md`へ入力する。
+
+- Company Vision / Values / Annual Goals
+- Organization Mission / Annual Goals / Period Goals
+- Priority Initiatives
+- Constraints
+- Previous Results / Lessons（存在する場合）
+- Source / Evidence / Input Owner
+
+以下の詳細情報は、Security ObjectiveとKPIの結論を左右する範囲から段階的に収集する。網羅的な棚卸しを初回利用の前提にしない。
+
 ## 1. Business
 
 - Mission / Vision
