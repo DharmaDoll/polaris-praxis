@@ -1,103 +1,99 @@
 # Security Strategy OS
 
-組織のセキュリティ戦略を、Business / Asset / Threat / Attack Path / Risk / Control / Residual Risk / Resilience の連鎖で設計・運用し、年度・半期の計画、予実、判断根拠、証跡までGitHub上で追跡するための中枢リポジトリ。
-
-## Core Model
-
-```text
-Company Vision / Values / Annual Goals
-        ↓
-Organization Mission / Annual / Period Goals / Priority Initiatives
-        ↓
-Business / Mission
-        ↓
-Asset / Crown Jewel
-        ↓
-Threat
-        ↓
-Attack Path
-        ↓
-Risk
-        ↓
-Control
-        ↓
-Residual Risk
-        ↓
-Resilience
-        ↓
-Strategy / Roadmap / Initiative
-        ↓
-Execution
-        ↓
-KPI / Evidence
-        ↓
-Actuals / Review / Next-period Recommendations
-        └──────────────────→ Strategy
-```
-
-## Repository Principle
-
-> Documents are views. Evidence, structured registers, and decisions are the source.
-
-このリポジトリは「もっともらしいセキュリティ文書を生成する場所」ではない。
-事実・未知・仮説・判断・根拠を区別し、組織として説明可能な戦略を継続的に構築する。
+半期・年度末に、部内のチーム・機能ごとの目標と実績から「何を評価し、次期に何を続ける・変えるか」を整理するための作業基盤です。会社・部門の方針と、そのチームが担う成果をつなぎ、会議で使える評価案を作ります。
 
 ## 利用者向けクイックスタート
 
-最初に行うことは、セキュリティ施策を考えることではなく、企業・組織の目標を一つの入力にまとめることです。次の流れで、目標から実行可能なSecurity ObjectiveとKPI、後日の次期提言までを作れます。
+まずは [短い入力メモ](examples/quick-review/input.md) と [返ってくる評価案](examples/quick-review/generated/review.md) を見比べてください。Product Security部内のAppSecチームの2つの目標を振り返る架空のサンプルです。[PSIRT・基盤・運用などの目標例](examples/quick-review/team-goal-examples.md)と、[根拠資料がまだない場合](examples/quick-review/generated/review-minimal.md)の出力例もあります。
+
+### 1. 目標と実績を渡す
+
+このリポジトリを参照できるAIエージェントに、次の依頼文をコピーし、分かるところだけ埋めて渡します。既存の目標シート、週報、議事録をそのまま使えます。資料の所在だけ分かる場合は、その旨を記載してください。
 
 ```text
-企業・組織の目標を入力
-        ↓
-Objective / KPI案を生成
-        ↓  人が確認・承認
-Strategy / Roadmap / Initiativeとして実行
-        ↓  実績・Evidenceを入力
-次年度（次期）への提言を生成
+prompts/12-results-to-next-year.md の「簡易レビュー」で振り返ってください。
+既存の会社・部門の方針と、対象チームの役割・目標があれば参照してください。
+チーム自身の成果と、他チームとの協働による成果・未解決事項を分けて評価してください。
+会議で読める1ページ程度に、今回の評価・次期の方針案・決めることをまとめてください。
+根拠と詳しい理由は末尾に分け、確認が必要な質問は最大3つに絞ってください。
+出力は承認前の案とし、正本や台帳は更新しないでください。
+
+対象チーム・機能、担当する製品・範囲、評価期間：
+1. 目標：会社・部門の方針、チームの役割、今期の目標と達成条件
+2. 実績：できたこと、できなかったこと、分かる数値や状態
+3. 根拠：確認できる記録・資料とその日付。手元になければ「未確認」
+4. 次期の事情：重点の変更、使える人員・時間、期限、他チームへの依存
 ```
 
-### 1. 対象を一つに絞る
+正式なKPIがなくても、整理から始められます。評価基準が未設定ならその旨を残し、後付けの基準で達成扱いにはしません。入力の書式整理と不明点の抽出はエージェントが担当します。
 
-最初は一つの重要事業サービス、プロダクト、または組織を対象にします。試行だけなら、架空データを含む [`examples/product-security-controls/`](examples/product-security-controls/) を使えます。実データを扱う場合は、`planning/*` ブランチを作成し、`examples/` には保存しません。
+実データは、組織が承認した保存先とAI利用環境で扱ってください。共有できない原本は渡さず、必要最小限の要約と参照先を使います。
 
-### 2. 最小限の目標を入力する
+### 2. 評価案を読む
 
-[`templates/planning-input.md`](templates/planning-input.md) を複製し、対象年度・組織名を付けて `context/business/` に保存します。まず次の項目だけを埋めてください。
+最初に読むのは次の3点です。
 
-- 企業・組織のVisionとValues
-- 年間目標、対象期の目標
-- 重点施策と期限
-- 制約（人員、予算、期限、規制など）
+- **今回の評価**：チームは役割をどこまで果たしたか。共同成果はどうなったか。何が根拠不足で判断できないか
+- **次期の方針案**：何を続ける・変える・止めるか。次の目標と測り方、担当・期限の案
+- **決めること**：責任者に判断してほしいこと、結論に必要な確認事項
 
-分からないことは推測せず `Unknown` と記載します。入力は事実・仮説・判断・Evidenceを区別してください。
+重要な残余リスクと判断保留の理由は本文に残します。詳しい攻撃経路や根拠の対応は、末尾の補足で確認できます。未確認の資料を確認済みとして扱いません。
 
-### 3. ObjectiveとKPI案を作る
+### 3. 修正し、次の行動を決める
 
-入力ファイルと [`prompts/11-goal-to-kpi.md`](prompts/11-goal-to-kpi.md) をAIまたはレビュー担当者に渡します。最初の出力として、通常は次の成果物が得られます。
+事実の違い、方針案への賛否、担当・期限を確認してください。「この実績は訂正」「この提案を検討したい」「この資料を追加する」と短く返せば、評価案を修正できます。
 
-- 企業・組織目標に紐づくSecurity Objective（通常1〜5件）
-- 各Objectiveを測るKPI（定性的な目標も観測可能な状態・期限・Evidenceに変換）
-- Business / Asset / Threat / Attack Path / Risk / Control Gapのつながり
-- 不足情報（`registers/unknowns.yaml` に登録する質問）
-- 提案した施策、責任者、期限、残余リスク、必要なEvidence
+評価案の作成までを、このQuick Startの区切りとします。正式な承認や残余リスクの受容は責任者が行い、その後に担当者・エージェントが承認された範囲を台帳と計画へ反映します。詳しくは [運用モデル](governance/OPERATING_MODEL.md) を参照してください。
 
-KPIは件数・日数・日時・金額・絶対量・状態などで表し、割合（`%`、率、比率など）は使いません。AIの出力自体はEvidenceではないため、承認前のドラフトとして扱います。
+<details>
+<summary>これから期初の目標を決める場合</summary>
 
-### 4. 人が確認し、台帳と計画に反映する
+次の依頼文と、既存の事業計画・部門目標を渡してください。会社・部門の方向性とチームの役割を確認してから、目標を1〜3件に絞ります。
 
-ObjectiveとKPIの妥当性、対象リスク、既存Control、残余リスク、責任者をレビューします。合意した内容だけを `registers/objectives.yaml`、`registers/kpis.yaml` と `strategy/`・`roadmap/`・`initiatives/` の成果物へ反映してください。不足情報は `registers/unknowns.yaml` に残します。
+```text
+prompts/11-goal-to-kpi.md の「簡易計画」で、今期のチーム目標を提案してください。
+会社・部門のVision、Values、目標と、チームの役割・重点施策・制約は以下を使ってください。
+チーム自身が担う成果と、開発など他チームとの共同成果を区別してください。
+会議で読める1ページ程度に、目標・KPI・取り組み・決めることをまとめてください。
+現状や根拠が足りない部分は未確認とし、確認質問は最大3つに絞ってください。
+出力は承認前の案とし、正本や台帳は更新しないでください。
 
-変更前に次の検証を実行します。
-
-```bash
-ruby scripts/validate_repository.rb
+対象チーム・機能、担当範囲、期間：
+会社・部門の方針と目標、チームの役割：
+重点施策と制約：
+分かっている現状・前期の実績と根拠：
 ```
 
-### 5. 実績を入力し、次期提言を得る
+項目を整理して入力したい場合は [Planning Input](templates/planning-input.md)、詳細な実績入力には [Period Results](templates/period-results.md) を使えます。
 
-期末またはレビュー時に [`templates/period-results.md`](templates/period-results.md) へ実績、未達理由、Decision、Evidenceを入力します。[`prompts/12-results-to-next-year.md`](prompts/12-results-to-next-year.md) を使うと、Objectiveごとに **Continue / Change / Stop / Complete / Hold** の判断、次期Objective・KPI案、根拠、信頼度、残余リスク、追加確認事項が得られます。
+</details>
 
-詳細な入力項目、レビューゲート、出力スキーマは [`docs/USER_GUIDE_AND_SPECIFICATION.md`](docs/USER_GUIDE_AND_SPECIFICATION.md)、最初の試行計画は [`docs/PILOT_GUIDE.md`](docs/PILOT_GUIDE.md)、実装チェックリストは [`plan.md`](plan.md) を参照してください。
+## 大切にする考え方
+
+> Documents are views. Evidence, structured registers, and decisions are the source.
+
+事実・未知・仮説・判断・根拠を区別し、組織として説明可能な戦略を継続的に構築します。目標には事業やリスクの望ましい変化を置き、個別の作業・対策はそれを支える施策として扱います。短い評価案でも、事業とのつながり、既存対策、残余リスク、根拠を保ちます。活動の完了だけを、リスク低減の証明にはしません。
+
+KPIは件数・日数・日時・金額・絶対量・観測可能な状態で表し、割合・率・比率は使いません。AIの出力自体はEvidenceではありません。
+
+<details>
+<summary>判断を支える全体モデル</summary>
+
+```text
+Company Vision / Values / Annual Goals
+→ Organization Mission / Goals / Priority Initiatives
+→ Business / Mission → Asset / Crown Jewel → Threat → Attack Path → Risk
+→ Existing Control / Control Gap → Proposed Control → Residual Risk → Resilience
+→ Strategy / Objective / Roadmap / Initiative → Execution → KPI / Evidence
+→ Actuals / Review / Next-period Recommendations → Strategy
+```
+
+詳細は [Vision](vision/VISION.md)、[Principles](vision/PRINCIPLES.md)、[Security Model](vision/SECURITY_MODEL.md) を参照してください。
+
+</details>
+
+<details>
+<summary>継続運用・エージェント設定を担当する方へ</summary>
 
 ## エージェントを使った運用
 
@@ -126,7 +122,7 @@ Read → Classify (Fact / Unknown / Assumption / Decision / Evidence)
      → Approved files only merge to main
 ```
 
-エージェントの出力は、承認前は [`drafts/`](drafts/) に保存するドラフトです。特に`registers/`、`strategy/`、`roadmap/`、`initiatives/`の正本更新、Residual Riskの受入れ、Decision Recordの確定は、レビュー完了後に行います。Promptごとの入力・出力・Gateは [`prompts/README.md`](prompts/README.md) に記載しています。実データを扱う場合は、必ず対象組織の非公開リポジトリまたは承認済みの作業ブランチを使用してください。
+エージェントの出力は、承認前は [`drafts/`](drafts/) に保存するドラフトです。特に`registers/`、`strategy/`、`roadmap/`、`initiatives/`の正本更新、Residual Riskの受入れ、Decision Recordの確定は、レビュー完了後に行います。Promptごとの入力・出力・Gateは [`prompts/README.md`](prompts/README.md) に記載しています。実データを扱う保存先は組織が承認したアクセス制御下に置き、その中で作業ブランチを使用してください。簡易レビューは会話のメモから受け付け、保存が必要な入力整理案と出力は`drafts/`に置きます。
 
 ### Skillの段階的な導入案
 
@@ -143,13 +139,15 @@ Skill導入の判断条件は、同じ手作業が複数のPilotで繰り返さ�
 ## Start Here（設計・運用者向け）
 
 1. `AGENTS.md`、[`vision/VISION.md`](vision/VISION.md)、[`vision/PRINCIPLES.md`](vision/PRINCIPLES.md) を確認する
-2. 詳細仕様とPilot手順を読む
+2. [詳細仕様](docs/USER_GUIDE_AND_SPECIFICATION.md)と[Pilot手順](docs/PILOT_GUIDE.md)を読む
 3. 上記クイックスタートで一つの対象を最後まで通す
-4. MVP後の拡張候補は [`docs/DEFERRED_REQUIREMENTS.md`](docs/DEFERRED_REQUIREMENTS.md) で管理する
+4. [実装計画](plan.md)と[MVP後の拡張候補](docs/DEFERRED_REQUIREMENTS.md)を確認する
+
+ファイル変更後は`ruby scripts/validate_repository.rb`で基本的な台帳・リンクの整合性を確認します。評価内容や承認の妥当性は人が確認します。
 
 ## Sample Data
 
-`examples/product-security-controls/`に、架空企業の企業・組織目標、Product Security Current State、承認済みPlan、後日実績のサンプルがある。`examples/`配下はすべてSyntheticかつ非正本であり、rootの台帳・戦略・Evidenceへ自動反映しない。
+[簡易レビュー](examples/quick-review/)には短いメモから評価案を作る例、[Product Security](examples/product-security-controls/)には詳細な目標・現状・実績の入力例があります。`examples/`配下はすべてSyntheticかつ非正本であり、rootの台帳・戦略・Evidenceへ自動反映しません。
 
 ## Branch Model
 
@@ -165,3 +163,5 @@ Skill導入の判断条件は、同じ手作業が複数のPilotで繰り返さ�
 原則:
 
 > `main`には「現在の真実」を置き、Branchでは「未来・仮説・選択肢」を扱う。
+
+</details>

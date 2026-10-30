@@ -34,3 +34,7 @@ Before analysis, an agent must read:
 
 The agent must first return its current understanding, missing information, assumptions, and proposed output location. It must not update authoritative files before human review.
 
+## Quick Start intake
+
+簡易計画・簡易レビューでは、利用者は既存資料や会話のメモから始められる。エージェントは上記の既存Contextを参照し、対象・期間・目標・実績・根拠・制約を整理する。部内のチーム・機能を扱う場合は、会社・部門の方針に加え、当該チームの役割・担当範囲・依存先を整理する。資料名だけの参照や自己申告を、確認済みFactとして扱わない。保存が必要な入力整理案は`drafts/`へ置き、人による確認前に`context/`や正本の台帳を更新しない。組織固有の保存先・権限等が未確定でも、共有を許可された情報によるドラフト整理は可能だが、正式運用が承認されたことを意味しない。
+
